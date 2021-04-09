@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/go-whisper/go-whisper/app/controller/web"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,12 +10,13 @@ import (
 
 func init() {
 	service := instance.WebService()
-	// web:
+	// default:
 	{
 		frontend := service.Group("")
-		frontend.GET("", func(c *gin.Context) {
-			c.String(http.StatusOK, "首页")
-		})
+		{
+			ctr := web.Index{}
+			frontend.GET("", ctr.Index)
+		}
 	}
 	{
 		admin := service.Group("/admin")

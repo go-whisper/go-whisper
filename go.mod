@@ -11,6 +11,7 @@ require (
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-sqlite3 v1.14.6 // indirect
 	github.com/spf13/viper v1.7.1
+	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/ugorji/go v1.2.5 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.16.0

@@ -8,5 +8,7 @@ import (
 
 func main() {
 	service := instance.WebService()
+	service.LoadHTMLGlob(viper.GetString("template.path") + "/default/*")
+	service.Static("public", "./public")
 	service.Run(viper.GetString("service.address"))
 }

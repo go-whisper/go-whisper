@@ -1,0 +1,69 @@
+{{ define "default/tpl_header.html" }}
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <title>{{ .Title }}</title>
+    <link href="/public/default/css/reset.scss" type="text/css" rel="stylesheet"/>
+    <link href="/public/default/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link href="/public/default/css/pure.css?version=0.2008" type="text/css" rel="stylesheet"/>
+    <link href="/public/default/css/pure_patch.css?version=0.2008" type="text/css" rel="stylesheet"/>
+    <link href="/public/default/css/markdown.css?version=0.2008" type="text/css" rel="stylesheet"/>
+    <link href="/public/default/css/style.scss" type="text/css" rel="stylesheet"/>
+    <link href="/public/default/css/fonts.css" type="text/css" rel="stylesheet"/>
+
+</head>
+
+<body class="page-home">
+<div id="header" class="mod-header">
+    <h1 class="site-title"><a href="/?status=loaded" >Something</a></h1>
+
+    <div class="mod-nav"><script type="text/javascript" src="/public/default/js/jquery.js?version=0.2008"></script>
+        <script type="text/javascript" src="/public/default/js/__jquery.smartmenus.js?version=0.2008"></script>
+        <link href="/public/default/css/__sm-core-css.css?version=0.2008" type="text/css" rel="stylesheet"/>
+        <link href="/public/default/css/__sm-base.css?version=0.2008" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="/public/default/js/__run_menu.js?version=0.2008"></script>
+        <link href="/public/default/css/__nav.css" type="text/css" rel="stylesheet"/>
+
+        <div class="farbox_nav_container bitcron_nav_container">
+            <div class="menu_toggle">
+
+
+                <input type="checkbox" id="d_5f422dfd72674b669d2a2bf79ed22222_nav"  class="menu_state"/>
+
+                <label for="d_5f422dfd72674b669d2a2bf79ed22222_nav"  class="menu_btn"><span class="menu_btn_icon">Toggle main menu visibility</span>
+
+                </label>
+
+                <style type="text/css">@media (max-width: 767px){
+                    .farbox_nav { display: none; }
+                }
+                </style>
+            </div>
+
+
+
+
+            <div class="farbox_nav bitcron_nav">
+                <div class="mixed_site_nav_wrap site_nav_wrap">
+                    <ul class="mixed_site_nav site_nav sm sm-base">
+                        <li><a id="d027fb16a994f11ebbb250242ac110002" href="/" class=" nav__item"  >首页</a></li>
+                        <li><a id="d027fc5c4994f11ebbb250242ac110002" href="/archive" class=" nav__item"  >归档</a></li>
+
+                    </ul>
+                    <div class="clear clear_nav_inline_end"></div>
+                </div>
+            </div>
+
+            <div class="clear clear_nav_end"></div>
+        </div>
+
+    </div>
+
+</div>
+{{ end }}
