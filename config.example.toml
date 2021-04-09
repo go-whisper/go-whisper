@@ -1,5 +1,7 @@
 [service]
     address = ":8080"
+[template]
+    path = "./templates"
 [database]
     path = "./storage/db/go-whisper.db"
 [logger]
