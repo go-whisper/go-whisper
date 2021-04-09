@@ -1,0 +1,7 @@
+.vscode/
+.idea/
+*DS_Store
+/storage/logs/*.log
+/storage/db/*.db
+config.toml
+*.private.env.json
