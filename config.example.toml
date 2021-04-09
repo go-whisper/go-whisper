@@ -1,0 +1,6 @@
+[service]
+    address = ":8080"
+[database]
+    path = "./storage/db/go-whisper.db"
+[logger]
+    path = "./storage/logs/common.log"
