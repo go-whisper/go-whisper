@@ -1,16 +1,24 @@
 package web
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Controller struct {
 	//
 }
 
+type Blog struct {
+	Name        string
+	Description string
+	Domain      string
+}
+
 type Template struct {
+	Blog        Blog
 	Path        string
 	Title       string
 	Keywords    string
@@ -20,14 +28,16 @@ type Template struct {
 }
 
 func (ctr Controller) NewTemplate(path string) *Template {
-	tplName := "default/" // 暂不支持多模板
+	tplName := "crude/" // 暂不支持多模板
 	if path != "" && !strings.HasPrefix(path, tplName) {
 		path = tplName + path
 	}
 	if path != "" && !strings.HasSuffix(path, ".html") {
 		path += ".html"
 	}
-	return &Template{Path: path}
+	tpl := &Template{Path: path}
+	tpl.Blog = Blog{Name: "Blog Name", Description: "Blog Description", Domain: "https://domain.com"}
+	return tpl
 }
 
 func (ctr Controller) Response(c *gin.Context, tpl *Template) {

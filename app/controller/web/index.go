@@ -13,7 +13,7 @@ type Index struct {
 }
 
 func (ctr Index) Index(c *gin.Context) {
-	tpl := ctr.NewTemplate("default/index.html")
+	tpl := ctr.NewTemplate("index.html")
 	opt := model.Option{}
 	var (
 		err   error
