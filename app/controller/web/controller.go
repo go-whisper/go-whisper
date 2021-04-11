@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/go-whisper/go-whisper/app/model"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,14 +13,8 @@ type Controller struct {
 	//
 }
 
-type Blog struct {
-	Name        string
-	Description string
-	Domain      string
-}
-
 type Template struct {
-	Blog        Blog
+	Site        *model.Site
 	Path        string
 	Title       string
 	Keywords    string
@@ -36,7 +32,7 @@ func (ctr Controller) NewTemplate(path string) *Template {
 		path += ".html"
 	}
 	tpl := &Template{Path: path}
-	tpl.Blog = Blog{Name: "Blog Name", Description: "Blog Description", Domain: "https://domain.com"}
+	tpl.Site = model.GetSite()
 	return tpl
 }
 
