@@ -183,3 +183,7 @@ h3 {
     width: auto;
     background-color: #00aa00;
 }
+
+.admin-tool-box {
+    width:100%; text-align: right; overflow:hidden;top:10em; right: 20em; position: sticky;
+}

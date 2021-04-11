@@ -11,7 +11,14 @@
         {{template "crude/_sidebar.html" .}}
     </div>
 
+
+
     <div class="content pure-u-1 pure-u-md-3-4">
+        {{if .IsLoggedIn}}
+        <div class="admin-tool-box">
+            <a class="pure-button pure-button-primary" href="#">[+] 添加内容</a>
+        </div>
+        {{end}}
         <div>
             <!-- A wrapper for all the blog posts -->
             <div class="posts">
