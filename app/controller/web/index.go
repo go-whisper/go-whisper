@@ -25,7 +25,7 @@ func (ctr Index) Index(c *gin.Context) {
 		instance.Logger().Error("加载首页出错", zap.String("caller", caller("Index", "Index")))
 		// TODO: 输出错误页
 	}
-	tpl.Title = "首页 - Something"
+	tpl.Title = "首页 - " + tpl.Site.Name
 	tpl.Data = gin.H{
 		"total": total,
 		"posts": posts,

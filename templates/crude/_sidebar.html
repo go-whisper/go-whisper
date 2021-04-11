@@ -1,0 +1,17 @@
+{{ define "crude/_sidebar.html" }}
+<div class="header">
+    <h1 class="brand-title">{{ .Site.Name }}</h1>
+    <h2 class="brand-tagline">{{ .Site.Description }}</h2>
+
+    <nav class="nav">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a class="pure-button" href="{{ .Site.Domain }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="pure-button" href="{{ .Site.Domain }}/articles">Article</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{{ end }}

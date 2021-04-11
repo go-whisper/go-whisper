@@ -6,3 +6,6 @@
     path = "./storage/db/go-whisper.db"
 [logger]
     path = "./storage/logs/common.log"
+[secure]
+    # resetToken 重置用户密码所需口令(必须128个字符)
+    resetToken = ""

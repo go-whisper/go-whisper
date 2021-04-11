@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/go-whisper/go-whisper/app/controller/middleware"
 	"github.com/go-whisper/go-whisper/app/controller/web"
 	"net/http"
 
@@ -10,6 +11,7 @@ import (
 
 func init() {
 	service := instance.WebService()
+	service.Use(middleware.Tracker(), middleware.InitUser())
 	// default:
 	{
 		frontend := service.Group("")
@@ -17,12 +19,17 @@ func init() {
 			ctr := web.Index{}
 			frontend.GET("", ctr.Index)
 		}
-	}
-	{
-		admin := service.Group("/admin")
-		admin.GET("", func(c *gin.Context) {
-			c.String(http.StatusOK, "管理-首页")
-		})
+		{
+			ctr := web.User{}
+			frontend.GET("login", ctr.LoginForm)
+			frontend.POST("login", ctr.Login)
+			frontend.POST("reset-password", ctr.ResetPassword)
+		}
+		{
+			ctr := web.Post{}
+			group := frontend.Group("posts")
+			group.GET(":id/delete", ctr.Remove)
+		}
 	}
 
 	// api:

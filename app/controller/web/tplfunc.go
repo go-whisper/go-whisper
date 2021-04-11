@@ -33,5 +33,5 @@ func TimeDay(t time.Time) int {
 func MarkdownToHTML(d string) template.HTML {
 	extensions := parser.CommonExtensions | parser.AutoHeadingIDs
 	parser := parser.NewWithExtensions(extensions)
-	return template.HTML(string(markdown.ToHTML([]byte(d), parser, nil)))
+	return template.HTML(markdown.ToHTML([]byte(d), parser, nil))
 }
