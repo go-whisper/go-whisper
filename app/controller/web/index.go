@@ -26,7 +26,7 @@ func (ctr Index) Index(c *gin.Context) {
 		// TODO: 输出错误页
 	}
 	tpl.Title = "首页 - Something"
-	tpl.Data = map[string]interface{}{
+	tpl.Data = gin.H{
 		"total": total,
 		"posts": posts,
 	}

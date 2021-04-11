@@ -1,0 +1,145 @@
+.fmt:before, .fmt:after {
+    content: " ";
+    display: table;
+}
+.fmt:after {
+    clear: both;
+}
+
+/* line 5, ../scss/widget/_format.scss */
+.fmt {
+    font-size: 14px;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+/* line 12, ../scss/widget/_format.scss */
+.fmt h1 {
+    padding-bottom: 8px;
+    font-size: 1.57143em;
+}
+/* line 16, ../scss/widget/_format.scss */
+.fmt h2 {
+    padding-bottom: 8px;
+    border-bottom: 1px dotted #ccc;
+    font-size: 1.42857em;
+}
+/* line 21, ../scss/widget/_format.scss */
+.fmt h3 {
+    font-size: 1.14286em;
+}
+/* line 24, ../scss/widget/_format.scss */
+.fmt h4 {
+    font-size: 1em;
+}
+/* line 27, ../scss/widget/_format.scss */
+.fmt h5 {
+    font-size: 0.92857em;
+}
+/* line 30, ../scss/widget/_format.scss */
+.fmt h6 {
+    font-size: 0.85714em;
+}
+/* line 34, ../scss/widget/_format.scss */
+.fmt h4, .fmt p, .fmt ul, .fmt ol, .fmt pre, .fmt blockquote, .fmt table {
+    margin: 18px 0;
+}
+/* line 37, ../scss/widget/_format.scss */
+.fmt h1, .fmt h2, .fmt h3 {
+    margin: 28px 0 18px;
+}
+/* line 42, ../scss/widget/_format.scss */
+.fmt > h1:first-child, .fmt h2:first-child, .fmt h3:first-child, .fmt h4:first-child, .fmt p:first-child, .fmt ul:first-child, .fmt ol:first-child, .fmt pre:first-child, .fmt blockquote:first-child, .fmt table:first-child {
+    margin-top: 0;
+}
+/* line 47, ../scss/widget/_format.scss */
+.fmt ul, .fmt ol {
+    padding-left: 30px;
+}
+/* line 49, ../scss/widget/_format.scss */
+.fmt ul p:first-child, .fmt ol p:first-child {
+    margin: 0;
+}
+/* line 52, ../scss/widget/_format.scss */
+.fmt ul ul, .fmt ul ol, .fmt ol ul, .fmt ol ol {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+/* line 58, ../scss/widget/_format.scss */
+.fmt img, .fmt video, .fmt audio {
+    max-width: 100%;
+    position: static !important;
+}
+/* line 62, ../scss/widget/_format.scss */
+.fmt blockquote {
+    border-color: #008E59;
+    color: #555;
+    font-size: 1em;
+}
+/* line 66, ../scss/widget/_format.scss */
+.fmt blockquote p:first-child {
+    margin-top: 0;
+}
+/* line 70, ../scss/widget/_format.scss */
+.fmt pre, .fmt code {
+    font-size: 0.92857em;
+    background-color: #f6f6f6;
+}
+/* line 77, ../scss/widget/_format.scss */
+.fmt pre {
+    padding: 10px;
+    border: none;
+    overflow: auto;
+    line-height: 1.3;
+    max-height: 500px;
+}
+/* line 84, ../scss/widget/_format.scss */
+.fmt pre code {
+    background-color: transparent;
+    font-size: 1em;
+    overflow-wrap: normal;
+    white-space: inherit;
+}
+/* line 90, ../scss/widget/_format.scss */
+.fmt hr {
+    margin: 20px auto;
+    border-top: 2px dotted #eee;
+}
+/* line 94, ../scss/widget/_format.scss */
+.fmt kbd {
+    padding: 4px 4px 3px;
+    background: #eee;
+    color: #555;
+}
+/* line 99, ../scss/widget/_format.scss */
+.fmt .x-scroll {
+    overflow-x: auto;
+}
+/* line 102, ../scss/widget/_format.scss */
+.fmt table {
+    width: 100%;
+}
+/* line 104, ../scss/widget/_format.scss */
+.fmt table th, .fmt table td {
+    border: 1px solid #E6E6E6;
+    padding: 5px 8px;
+    word-break: normal;
+}
+/* line 109, ../scss/widget/_format.scss */
+.fmt table th {
+    background: #F3F3F3;
+}
+
+
+/* line 77, ../scss/widget/_comments.scss */
+.widget-comments .fmt {
+    font-size: 13px;
+}
+/* line 79, ../scss/widget/_comments.scss */
+.widget-comments .fmt h1, .widget-comments .fmt h2, .widget-comments .fmt h3, .widget-comments .fmt h4,
+.widget-comments .fmt p, .widget-comments .fmt ul, .widget-comments .fmt ol, .widget-comments .fmt pre, .widget-comments .fmt blockquote, .widget-comments .fmt table {
+    margin: 10px 0;
+}
+/* line 84, ../scss/widget/_comments.scss */
+.widget-comments .fmt > h1:first-child, .widget-comments .fmt h2:first-child, .widget-comments .fmt h3:first-child, .widget-comments .fmt h4:first-child, .widget-comments .fmt p:first-child, .widget-comments .fmt ul:first-child, .widget-comments .fmt ol:first-child, .widget-comments .fmt pre:first-child, .widget-comments .fmt blockquote:first-child, .widget-comments .fmt table:first-child {
+    margin-top: 0;
+}

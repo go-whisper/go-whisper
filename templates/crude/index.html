@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/public/crude/css/grids-responsive-min.css">
     <link rel="stylesheet" href="/public/crude/css/style.css">
     <link rel="stylesheet" href="/public/crude/css/pagination.css">
+    <link rel="stylesheet" href="/public/crude/css/fmt.css">
     <script src="/public/crude/js/pagination.js"></script>
 </head>
 <body>
@@ -80,11 +81,9 @@
                             </div>
                         </div>
                         {{ end }}
-
-
-                        <p>
-                            {{ .Content }}
-                        </p>
+                        <div class="fmt">
+                            {{MarkdownToHTML .Content }}
+                        </div>
                     </div>
                 </section>
                 {{ end }}

@@ -24,7 +24,7 @@ type Template struct {
 	Keywords    string
 	Description string
 	Author      string
-	Data        map[string]interface{}
+	Data        gin.H
 }
 
 func (ctr Controller) NewTemplate(path string) *Template {
