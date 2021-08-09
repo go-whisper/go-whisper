@@ -3,6 +3,7 @@ package web
 import (
 	"github.com/go-whisper/go-whisper/app/model"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -47,4 +48,36 @@ func (ctr Controller) Response(c *gin.Context, tpl *Template) {
 		}
 	}
 	c.HTML(http.StatusOK, tpl.Path, *tpl)
+}
+
+// GetQueryInt 返回查询参数中 key 对应的值
+// 如果找不到 key 或者 key 的值不是有效数值，则返回的第2个参数返回 false
+// 可以指定 defVal 参数作为默认值返回
+func (*Controller) GetQueryInt(c *gin.Context, key string, defVal ...int) (int, bool) {
+	def := 0
+	if len(defVal) == 1 {
+		def = defVal[0]
+	}
+	val, has := c.GetQuery(key)
+	if !has {
+		return def, false
+	}
+	if v, err := strconv.Atoi(val); err == nil {
+		return v, true
+	}
+	return def, false
+}
+
+// GetParamInt 从路由参数中返回 key 对应的值
+// 规则与 GetQueryInt() 函数相同
+func (*Controller) GetParamInt(c *gin.Context, key string, defVal ...int) (int, bool) {
+	def := 0
+	if len(defVal) == 1 {
+		def = defVal[0]
+	}
+	strVal := c.Param(key)
+	if v, err := strconv.Atoi(strVal); err == nil {
+		return v, true
+	}
+	return def, false
 }

@@ -26,6 +26,7 @@ func (ctr User) Login(c *gin.Context) {
 		tpl := ctr.NewTemplate("login.html")
 		tpl.Title = "登录 - " + tpl.Site.Name
 		tpl.Data = gin.H{"message": err.Error()}
+		instance.Logger().Warn("用户登录失败", zap.String("name", c.PostForm("name")))
 		ctr.Response(c, tpl)
 		return
 	}

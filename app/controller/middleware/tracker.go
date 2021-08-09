@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"strings"
 	"time"
 
 	"github.com/go-whisper/go-whisper/app/instance"
@@ -12,6 +13,9 @@ import (
 
 func Tracker() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		if strings.Contains(c.Request.RequestURI, ".css") || strings.Contains(c.Request.RequestURI, ".js") {
+			return
+		}
 		t1 := time.Now()
 		u1, err := uuid.NewUUID()
 		if err != nil {

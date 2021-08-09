@@ -21,9 +21,9 @@ func init() {
 		}
 		{
 			ctr := web.User{}
-			frontend.GET("login", ctr.LoginForm)
-			frontend.POST("login", ctr.Login)
-			frontend.POST("reset-password", ctr.ResetPassword)
+			frontend.GET("users/login", ctr.LoginForm)
+			frontend.POST("users/login-do", ctr.Login)
+			frontend.POST("users/reset-password", ctr.ResetPassword)
 		}
 		{
 			ctr := web.Post{}
