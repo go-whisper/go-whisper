@@ -5,3 +5,4 @@
 /storage/db/*.db
 config.toml
 *.private.env.json
+/bin/
