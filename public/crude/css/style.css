@@ -17,6 +17,32 @@ h3 {
     font-weight: 100;
 }
 
+/* 引用样式 */
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #f29d4c;
+    margin: 1.5em 10px;
+    padding: .5em 10px;
+    quotes: "\201C""\201D";
+}
+
+blockquote:before {
+    color: #9ba646;
+    content: open-quote;
+    font-size: 4em;
+    line-height: .1em;
+    margin-right: .25em;
+    vertical-align: -.4em;
+}
+
+blockquote p {
+    display:inline;
+}
+
+pre {
+    line-height: 26px;
+}
+
 /* LAYOUT CSS */
 .pure-img-responsive {
     max-width: 100%;
@@ -113,24 +139,21 @@ h3 {
     margin: 0;
 }
 
-.post-category {
+.tag {
     margin: 0 0.1em;
     padding: 0.3em 1em;
     color: #fff;
     background: #999;
     font-size: 80%;
 }
-.post-category-design {
-    background: #5aba59;
-}
-.post-category-pure {
-    background: #4d85d1;
-}
-.post-category-yui {
+.tag-pinned-posts {
     background: #8156a7;
+    border-radius: 5px;
 }
-.post-category-js {
-    background: #df2d4f;
+
+.tag-posts {
+    background: #4d85d1;
+    border-radius: 5px;
 }
 
 .post-images {
@@ -175,6 +198,14 @@ h3 {
     .footer {
         text-align: center;
     }
+}
+
+.fmt code {
+    font-size: 0.9em;
+    border-radius:4px;
+    font-family:Consolas,Monaco,Menlo,monospace;
+    color: #c7254e;
+    background-color: #f8f5ec;
 }
 
 /* ---- */

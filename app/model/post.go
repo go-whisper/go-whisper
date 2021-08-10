@@ -1,10 +1,9 @@
 package model
 
 import (
-	"strings"
-	"time"
-
+	"encoding/json"
 	"gorm.io/gorm"
+	"strings"
 )
 
 const (
@@ -14,24 +13,31 @@ const (
 )
 
 type Post struct {
-	ID           uint
-	URL          string `gorm:"url"`
-	Title        string
-	Content      string
-	Tags         []string  `gorm:"-"`
-	TagsStr      string    `gorm:"column:tags"`
-	CreatedAt    time.Time `gorm:"-"`
-	CreatedAtInt int64     `gorm:"column:created_at"`
-	Type         string    `gorm:"column:type"`
-	IsPinned     bool      `gorm:"column:is_pinned"`
+	ID        uint
+	URL       string `gorm:"url"`
+	Title     string
+	Content   string
+	Tags      []string `gorm:"-"`
+	TagsStr   string   `gorm:"column:tags"`
+	Type      string   `gorm:"column:type"`
+	IsPinned  bool     `gorm:"column:is_pinned"`
+	CreatedAt string   `gorm:"time"`
 }
 
 func (p *Post) AfterFind(tx *gorm.DB) (err error) {
 	if p.TagsStr != "" {
-		p.Tags = strings.Split(p.TagsStr, ",")
-	}
-	if p.CreatedAtInt > 0 {
-		p.CreatedAt = time.Unix(p.CreatedAtInt, 0)
+		// 先尝试解析 JSON
+		var tags []string
+		if e := json.Unmarshal([]byte(p.TagsStr), &tags); e == nil {
+			if len(tags) > 1 || tags[0] != "" {
+				p.Tags = tags
+			}
+		} else { // 尝试使用逗号分割
+			tags = strings.Split(p.TagsStr, ",")
+			if len(tags) > 1 || tags[0] != "" {
+				p.Tags = tags
+			}
+		}
 	}
 	return
 }

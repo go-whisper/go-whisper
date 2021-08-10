@@ -28,15 +28,20 @@ func (ctr Index) Index(c *gin.Context) {
 		instance.Logger().Error("加载首页出错", zap.String("caller", caller("Index", "Index")))
 		// TODO: 输出错误页
 	}
-
 	pagination := NewPagination(c.Request, int(total), pageSize)
+
+	// 置顶博文:
+	opt = model.Option{}
+	opt.Set("pinned_only", "yes")
+	_, pinnedPosts, err := post.List(5, 0, opt)
 
 	tpl.Title = "首页 - " + tpl.Site.Name
 	tpl.Data = gin.H{
-		"total": total * 10,
-		"posts": posts,
-		"p":     p,
-		"page":  template.HTML(pagination.Pages()),
+		"total":       total * 10,
+		"posts":       posts,
+		"pinnedPosts": pinnedPosts,
+		"p":           p,
+		"page":        template.HTML(pagination.Pages()),
 	}
 	ctr.Response(c, tpl)
 }

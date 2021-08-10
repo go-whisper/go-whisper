@@ -24,20 +24,22 @@
                 <h1 class="content-subhead">Pinned Post</h1>
 
                 <!-- A single blog post -->
+                {{ range .Data.pinnedPosts }}
                 <section class="post">
                     <header class="post-header">
-                        <h2 class="post-title">置顶的东东</h2>
+                        <h2 class="post-title"><a class="tag tag-pinned-posts">*</a>{{.Title}}</h2>
                         <p class="post-meta">
-                            2021-04-10 14:27:00 <a class="post-category post-category-design" href="#">TagA</a> <a class="post-category post-category-pure" href="#">TagB</a>
+                            {{.CreatedAt}}
+                            {{range .Tags}}<a class="tag tag-posts" href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{ end }}
                         </p>
                     </header>
-
                     <div class="post-description">
                         <p>
-                            这里是一篇置顶的信息，不过现在还什么都没有。
+                            {{MarkdownToHTML .Content }}
                         </p>
                     </div>
                 </section>
+                {{ end }}
             </div>
 
             <div class="posts">
@@ -51,7 +53,7 @@
                             {{if $.IsLoggedIn}}
                             <a href="{{$.Site.Domain}}/posts/{{.ID}}/delete">[X]删除</a>
                             {{end}}
-                            {{range .Tags}}<a class="post-category post-category-pure" href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{ end }}
+                            {{range .Tags}}<a class="tag tag-posts" href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{ end }}
                         </p>
                     </header>
 

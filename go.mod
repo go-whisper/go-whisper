@@ -10,7 +10,7 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
-	github.com/mattn/go-sqlite3 v1.14.6 // indirect
+	github.com/mattn/go-sqlite3 v1.14.8 // indirect
 	github.com/muesli/cache2go v0.0.0-20201208071950-e3e970b4892f
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.7.0

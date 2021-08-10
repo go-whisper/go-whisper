@@ -8,7 +8,7 @@
 
 /* line 5, ../scss/widget/_format.scss */
 .fmt {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
     word-wrap: break-word;
 }
@@ -40,7 +40,7 @@
     font-size: 0.85714em;
 }
 /* line 34, ../scss/widget/_format.scss */
-.fmt h4, .fmt p, .fmt ul, .fmt ol, .fmt pre, .fmt blockquote, .fmt table {
+.fmt h4, .fmt p, .fmt ul, .fmt ol, .fmt pre, .fmt table {
     margin: 18px 0;
 }
 /* line 37, ../scss/widget/_format.scss */
@@ -69,18 +69,9 @@
     max-width: 100%;
     position: static !important;
 }
-/* line 62, ../scss/widget/_format.scss */
-.fmt blockquote {
-    border-color: #008E59;
-    color: #555;
-    font-size: 1em;
-}
-/* line 66, ../scss/widget/_format.scss */
-.fmt blockquote p:first-child {
-    margin-top: 0;
-}
+
 /* line 70, ../scss/widget/_format.scss */
-.fmt pre, .fmt code {
+.fmt pre {
     font-size: 0.92857em;
     background-color: #f6f6f6;
 }
@@ -140,6 +131,6 @@
     margin: 10px 0;
 }
 /* line 84, ../scss/widget/_comments.scss */
-.widget-comments .fmt > h1:first-child, .widget-comments .fmt h2:first-child, .widget-comments .fmt h3:first-child, .widget-comments .fmt h4:first-child, .widget-comments .fmt p:first-child, .widget-comments .fmt ul:first-child, .widget-comments .fmt ol:first-child, .widget-comments .fmt pre:first-child, .widget-comments .fmt blockquote:first-child, .widget-comments .fmt table:first-child {
+.widget-comments .fmt > h1:first-child, .widget-comments .fmt h2:first-child, .widget-comments .fmt h3:first-child, .widget-comments .fmt h4:first-child, .widget-comments .fmt p:first-child, .widget-comments .fmt ul:first-child, .widget-comments .fmt ol:first-child, .widget-comments .fmt pre:first-child, .widget-comments, .widget-comments .fmt table:first-child {
     margin-top: 0;
 }

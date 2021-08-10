@@ -1,5 +1,5 @@
 /* PrismJS 1.24.1
-https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+css+clike+javascript+bash+c+csv+dart+docker+git+go+http+java+javadoc+javadoclike+json+kotlin+lua+makefile+markdown+markup-templating+nginx+php+phpdoc+php-extras+plsql+protobuf+python+ruby+rust+sql+swift+toml+typescript+vim&plugins=line-numbers+show-invisibles+show-language+toolbar */
+https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+css+clike+javascript+bash+c+csv+dart+docker+git+go+http+java+javadoc+javadoclike+json+kotlin+lua+makefile+markdown+markup-templating+nginx+php+phpdoc+php-extras+plsql+protobuf+python+ruby+rust+sql+swift+toml+typescript+vim&plugins=line-numbers+show-language+toolbar */
 /*
  Solarized Color Schemes originally by Ethan Schoonover
  http://ethanschoonover.com/solarized
@@ -191,41 +191,6 @@ pre[class*="language-"].line-numbers > code {
 			padding-right: 0.8em;
 			text-align: right;
 		}
-
-.token.tab:not(:empty),
-.token.cr,
-.token.lf,
-.token.space {
-	position: relative;
-}
-
-.token.tab:not(:empty):before,
-.token.cr:before,
-.token.lf:before,
-.token.space:before {
-	color: #808080;
-	opacity: 0.6;
-	position: absolute;
-}
-
-.token.tab:not(:empty):before {
-	content: '\21E5';
-}
-
-.token.cr:before {
-	content: '\240D';
-}
-
-.token.crlf:before {
-	content: '\240D\240A';
-}
-.token.lf:before {
-	content: '\240A';
-}
-
-.token.space:before {
-	content: '\00B7';
-}
 
 div.code-toolbar {
 	position: relative;
