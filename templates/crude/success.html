@@ -1,0 +1,31 @@
+{{ define "crude/success.html" }}
+<!doctype html>
+<html lang="zh">
+<head>
+    {{template "crude/_header.html" .}}
+</head>
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        {{template "crude/_sidebar.html" .}}
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <div>{{.Data.message}}</div>
+            <div style="margin: 60px 0;">
+                <a href="javascript:history.go(-1);">返回上一页</a>
+                <a href="/">返回首页</a>
+            </div>
+
+            <div class="footer">
+                {{template "crude/_footer.html" .}}
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{{ end }}

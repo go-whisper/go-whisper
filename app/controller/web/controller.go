@@ -81,3 +81,17 @@ func (*Controller) GetParamInt(c *gin.Context, key string, defVal ...int) (int, 
 	}
 	return def, false
 }
+
+func (ctr *Controller) Error(c *gin.Context, msg string) {
+	tpl := ctr.NewTemplate("error.html")
+	tpl.Title = "ERROR -_-"
+	tpl.Data = gin.H{"message": msg}
+	ctr.Response(c, tpl)
+}
+
+func (ctr *Controller) Success(c *gin.Context, msg string) {
+	tpl := ctr.NewTemplate("success.html")
+	tpl.Title = "Success"
+	tpl.Data = gin.H{"message": msg}
+	ctr.Response(c, tpl)
+}

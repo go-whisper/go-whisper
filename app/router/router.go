@@ -26,9 +26,12 @@ func init() {
 			frontend.POST("users/reset-password", ctr.ResetPassword)
 		}
 		{
+			admin := frontend.Group("admin")
+			admin.Use(middleware.AdminAuth())
 			ctr := web.Post{}
-			group := frontend.Group("posts")
-			group.GET(":id/delete", ctr.Remove)
+			admin.GET("posts/:id/delete", ctr.Remove)
+			admin.GET("posts/form", ctr.Form)
+			admin.POST("posts", ctr.Save)
 		}
 	}
 

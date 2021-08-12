@@ -15,7 +15,7 @@
     <div class="content pure-u-1 pure-u-md-3-4">
         {{if .IsLoggedIn}}
         <div class="admin-tool-box">
-            <a class="pure-button pure-button-primary" href="#" title="添加内容">
+            <a class="pure-button pure-button-primary" href="/admin/posts/form" title="添加内容">
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                 </a>
         </div>
@@ -53,7 +53,8 @@
                         <p class="post-meta">
                             {{.CreatedAt}}
                             {{if $.IsLoggedIn}}
-                            <a href="{{$.Site.Domain}}/posts/{{.ID}}/delete"><i class="fa fa-trash"></i></a>
+                            &nbsp;&nbsp; <a href="{{$.Site.Domain}}/admin/posts/form?id={{.ID}}" title="编辑"><i class="fa fa-pencil"></i></a>
+                            &nbsp;&nbsp; <a href="{{$.Site.Domain}}/admin/posts/{{.ID}}/delete" onclick="return confirm('确定要删除吗？');" title="删除"><i class="fa fa-trash"></i></a>
                             {{end}}
                             {{range .Tags}}<a class="tag tag-posts" href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{ end }}
                         </p>
@@ -90,7 +91,6 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
 {{ end }}

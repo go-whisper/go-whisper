@@ -33,8 +33,17 @@ func List(limit, offset int, opt model.Option) (int64, []model.Post, error) {
 
 func Remove(id uint) error {
 	if err := instance.DB().Where("id=?", id).Delete(model.Post{}).Error; err != nil {
-		instance.Logger().Error("db.Find() fail", zap.String("caller", caller("Remove", "db.Delete()")), zap.Error(err))
+		instance.Logger().Error("db.Find() fail", zap.Error(err))
 		return bizerr.ErrDB
 	}
 	return nil
+}
+
+func Detail(id uint) (model.Post, error) {
+	post := model.Post{}
+	if err := instance.DB().First(&post, id).Error; err != nil {
+		instance.Logger().Error("post.Detail() db.Find() fail", zap.String("caller", caller("Remove", "db.Delete()")), zap.Error(err))
+		return post, err
+	}
+	return post, nil
 }

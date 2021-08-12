@@ -3,6 +3,7 @@ package web
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-whisper/go-whisper/app/instance"
+	"github.com/go-whisper/go-whisper/app/model"
 	"github.com/go-whisper/go-whisper/app/service/post"
 	"go.uber.org/zap"
 	"net/http"
@@ -11,6 +12,39 @@ import (
 
 type Post struct {
 	Controller
+}
+
+func (ctr Post) Form(c *gin.Context) {
+	id, _ := ctr.GetQueryInt(c, "id", 0)
+	p, _ := post.Detail(uint(id))
+	tpl := ctr.NewTemplate("post-form.html")
+	tpl.Title = "首页 - " + tpl.Site.Name
+	tpl.Data = gin.H{
+		"post": p,
+		"id":   id,
+	}
+	ctr.Response(c, tpl)
+}
+
+func (ctr Post) Save(c *gin.Context) {
+	req := postRequest{}
+	if err := c.ShouldBind(&req); err != nil {
+		ctr.Error(c, "参数错误:"+err.Error())
+		return
+	}
+	p := model.Post{Title: req.Title, Content: req.Content}
+	id, _ := ctr.GetQueryInt(c, "id", 0)
+	var err error
+	if id == 0 {
+		err = post.Create(&p)
+	} else {
+		err = post.Update(uint(id), &p)
+	}
+	if err != nil {
+		ctr.Error(c, "处理数据出错:"+err.Error())
+		return
+	}
+	ctr.Success(c, "内容已保存。")
 }
 
 func (ctr Post) Remove(c *gin.Context) {
