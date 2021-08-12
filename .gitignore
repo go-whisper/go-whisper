@@ -6,3 +6,4 @@
 config.toml
 *.private.env.json
 /bin/
+build.sh
