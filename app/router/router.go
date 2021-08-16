@@ -1,9 +1,10 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/go-whisper/go-whisper/app/controller/middleware"
 	"github.com/go-whisper/go-whisper/app/controller/web"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-whisper/go-whisper/app/instance"
@@ -29,7 +30,7 @@ func init() {
 			admin := frontend.Group("admin")
 			admin.Use(middleware.AdminAuth())
 			ctr := web.Post{}
-			admin.GET("posts/:id/delete", ctr.Remove)
+			admin.DELETE("posts/:id", ctr.Remove)
 			admin.GET("posts/form", ctr.Form)
 			admin.POST("posts", ctr.Save)
 		}

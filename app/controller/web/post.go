@@ -1,13 +1,13 @@
 package web
 
 import (
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/go-whisper/go-whisper/app/model"
 	"github.com/go-whisper/go-whisper/app/service/post"
 	"go.uber.org/zap"
-	"net/http"
-	"strconv"
 )
 
 type Post struct {
@@ -52,12 +52,12 @@ func (ctr Post) Remove(c *gin.Context) {
 	idUint, err := strconv.ParseUint(id, 10, 64)
 	if err != nil {
 		instance.Logger().Error("无法解析id为数值", zap.String("caller", caller("post.Remove")), zap.Error(err))
-		// TODO: 统一的错误显示页面
+		ctr.JsonFail(c, "无法获取ID参数", 400)
 		return
 	}
 	if err = post.Remove(uint(idUint)); err != nil {
-		// TODO: 统一的错误显示页面
+		ctr.JsonFail(c, "操作错误", 500)
 		return
 	}
-	c.Redirect(http.StatusFound, "/")
+	ctr.JsonSuccess(c, gin.H{"id": id})
 }

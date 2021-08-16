@@ -1,13 +1,23 @@
 package web
 
 import (
-	"github.com/go-whisper/go-whisper/app/model"
 	"net/http"
 	"strconv"
 	"strings"
 
+	"github.com/go-whisper/go-whisper/app/model"
+
 	"github.com/gin-gonic/gin"
 )
+
+type jsonResponse struct {
+	Success bool        `json:"success"`
+	Data    interface{} `json:"data"`
+	Error   struct {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	} `json:"error"`
+}
 
 const UserCookieNamePrefix = "user."
 
@@ -94,4 +104,22 @@ func (ctr *Controller) Success(c *gin.Context, msg string) {
 	tpl.Title = "Success"
 	tpl.Data = gin.H{"message": msg}
 	ctr.Response(c, tpl)
+}
+
+func (*Controller) JsonSuccess(c *gin.Context, data interface{}) {
+	resp := jsonResponse{
+		Success: true,
+		Data:    data,
+	}
+	c.JSON(http.StatusOK, resp)
+}
+
+func (*Controller) JsonFail(c *gin.Context, errMsg string, errCode int) {
+	resp := jsonResponse{
+		Success: false,
+		Data:    nil,
+	}
+	resp.Error.Code = errCode
+	resp.Error.Message = errMsg
+	c.JSON(http.StatusOK, resp)
 }
