@@ -1,19 +1,16 @@
 package web
 
 import (
+	"html/template"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/go-whisper/go-whisper/app/model"
 	"github.com/go-whisper/go-whisper/app/service/post"
 	"go.uber.org/zap"
-	"html/template"
 )
 
-type Index struct {
-	Controller
-}
-
-func (ctr Index) Index(c *gin.Context) {
+func (ctr Post) Index(c *gin.Context) {
 	tpl := ctr.NewTemplate("index.html")
 	opt := model.Option{}
 	var (

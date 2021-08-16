@@ -1,0 +1,46 @@
+{{ define "crude/post-detail.html" }}
+<!doctype html>
+<html lang="zh">
+
+<head>
+    {{template "crude/_header.html" .}}
+</head>
+
+<body>
+
+    <div id="layout" class="pure-g">
+        <div class="sidebar pure-u-1 pure-u-md-1-4">
+            {{template "crude/_sidebar.html" .}}
+        </div>
+
+        <div class="content pure-u-1 pure-u-md-3-4">
+            <div>
+                <div class="posts">
+                    <h1 class="content-subhead">Pinned Post</h1>
+
+                    <section class="post">
+                        <header class="post-header">
+                            <h2 class="post-title">{{.Title}}</h2>
+                            <p class="post-meta">
+                                {{.Data.post.CreatedAt}}
+                                {{range .Data.post.Tags}}<a class="tag tag-posts"
+                                    href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{
+                                end }}
+                            </p>
+                        </header>
+                        <div class="post-description">
+                            <p>
+                                {{MarkdownToHTML .Data.post.Content }}
+                            </p>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+{{ end }}

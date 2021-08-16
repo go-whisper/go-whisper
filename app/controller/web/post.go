@@ -14,6 +14,21 @@ type Post struct {
 	Controller
 }
 
+func (ctr Post) Detail(c *gin.Context) {
+	id, _ := ctr.GetParamInt(c, "id")
+	p, err := post.Detail(uint(id))
+	if err != nil {
+		ctr.Error(c, "读取数据出错，请稍候再试")
+		return
+	}
+	tpl := ctr.NewTemplate("post-detail.html")
+	tpl.Title = p.Title + " - " + tpl.Site.Name
+	tpl.Data = gin.H{
+		"post": p,
+		"id":   id,
+	}
+	ctr.Response(c, tpl)
+}
 func (ctr Post) Form(c *gin.Context) {
 	id, _ := ctr.GetQueryInt(c, "id", 0)
 	p, _ := post.Detail(uint(id))

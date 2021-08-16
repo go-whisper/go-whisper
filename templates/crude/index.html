@@ -52,7 +52,7 @@
                     {{ range .Data.posts }}
                     <section class="post">
                         <header class="post-header">
-                            <h2 class="post-title">{{ .Title }}</h2>
+                            <h2 class="post-title"><a href="/posts/{{.ID}}">{{ .Title }}</a></h2>
                             <p class="post-meta">
                                 {{.CreatedAt}}
                                 {{if $.IsLoggedIn}}

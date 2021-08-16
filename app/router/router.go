@@ -17,8 +17,9 @@ func init() {
 	{
 		frontend := service.Group("")
 		{
-			ctr := web.Index{}
+			ctr := web.Post{}
 			frontend.GET("", ctr.Index)
+			frontend.GET("posts/:id", ctr.Detail)
 		}
 		{
 			ctr := web.User{}
