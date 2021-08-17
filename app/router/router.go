@@ -20,6 +20,7 @@ func init() {
 			ctr := web.Post{}
 			frontend.GET("", ctr.Index)
 			frontend.GET("posts/:id", ctr.Detail)
+			frontend.GET("tags/:tag", ctr.TagPosts)
 		}
 		{
 			ctr := web.User{}

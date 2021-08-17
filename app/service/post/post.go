@@ -1,10 +1,13 @@
 package post
 
 import (
+	"errors"
+
 	"github.com/go-whisper/go-whisper/app/bizerr"
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/go-whisper/go-whisper/app/model"
 	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 func List(limit, offset int, opt model.Option) (int64, []model.Post, error) {
@@ -14,7 +17,7 @@ func List(limit, offset int, opt model.Option) (int64, []model.Post, error) {
 		db = db.Where("title LIKE ? OR content LIKE ?", "%"+v+"%", "%"+v+"%")
 	}
 	if v := opt.GetString("tag"); v != "" {
-		db = db.Where("tags LIKE ?", "%,"+v+",%")
+		db = db.Where("tags LIKE ?", "%"+v+"%")
 	}
 	if v := opt.GetString("pinned_only"); v == "yes" {
 		db = db.Where("is_pinned=?", true)
@@ -25,8 +28,10 @@ func List(limit, offset int, opt model.Option) (int64, []model.Post, error) {
 		return total, posts, bizerr.ErrDB
 	}
 	if err := db.Limit(limit).Offset(offset).Order("id desc").Find(&posts).Error; err != nil {
-		instance.Logger().Error("db.Find() fail", zap.String("caller", caller("List", "db.Find()")), zap.Error(err))
-		return total, posts, bizerr.ErrDB
+		if !errors.Is(err, gorm.ErrRecordNotFound) {
+			instance.Logger().Error("db.Find() fail", zap.String("caller", caller("List", "db.Find()")), zap.Error(err))
+			return total, posts, bizerr.ErrDB
+		}
 	}
 	return total, posts, nil
 }
