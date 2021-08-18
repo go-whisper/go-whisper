@@ -18,6 +18,7 @@ type Post struct {
 	URL       string `gorm:"url"`
 	Title     string
 	Content   string
+	Summary   string   `gorm:"-"`
 	Tags      []string `gorm:"-"`
 	TagsStr   string   `gorm:"column:tags"`
 	Type      string   `gorm:"column:type"`
@@ -26,6 +27,7 @@ type Post struct {
 }
 
 func (p *Post) AfterFind(tx *gorm.DB) (err error) {
+	p.Summary = p.GetSummary()
 	if p.TagsStr != "" {
 		// 先尝试解析 JSON
 		var tags []string
@@ -43,7 +45,7 @@ func (p *Post) AfterFind(tx *gorm.DB) (err error) {
 	return
 }
 
-func (p Post) Summary() string {
+func (p Post) GetSummary() string {
 	tmp := strings.Split(p.Content, SummarySeparator())
 	return tmp[0]
 }

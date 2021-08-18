@@ -2,7 +2,6 @@ package post
 
 import (
 	"errors"
-	"strings"
 
 	"github.com/go-whisper/go-whisper/app/bizerr"
 	"github.com/go-whisper/go-whisper/app/instance"
@@ -32,14 +31,6 @@ func List(limit, offset int, opt model.Option) (int64, []model.Post, error) {
 		if !errors.Is(err, gorm.ErrRecordNotFound) {
 			instance.Logger().Error("db.Find() fail", zap.String("caller", caller("List", "db.Find()")), zap.Error(err))
 			return total, posts, bizerr.ErrDB
-		}
-	}
-	separator := model.GetSite().Separator
-	var tmp []string
-	for k := range posts {
-		tmp = strings.Split(posts[k].Content, separator)
-		if len(tmp) > 1 {
-			posts[k].Content = posts[k].Summary()
 		}
 	}
 	return total, posts, nil
