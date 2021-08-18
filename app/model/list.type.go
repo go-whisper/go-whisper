@@ -35,7 +35,7 @@ func NewStringList(s string) StringList {
 		return strList
 	}
 
-	return strList
+	return append(strList, s)
 }
 
 func (v StringList) Value() (driver.Value, error) {
