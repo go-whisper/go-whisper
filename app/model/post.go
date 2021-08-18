@@ -2,8 +2,9 @@ package model
 
 import (
 	"encoding/json"
-	"gorm.io/gorm"
 	"strings"
+
+	"gorm.io/gorm"
 )
 
 const (
@@ -40,4 +41,20 @@ func (p *Post) AfterFind(tx *gorm.DB) (err error) {
 		}
 	}
 	return
+}
+
+func (p Post) Summary() string {
+	tmp := strings.Split(p.Content, SummarySeparator())
+	return tmp[0]
+}
+
+var summarySeparator string
+
+func SummarySeparator() string {
+	if summarySeparator != "" {
+		return summarySeparator
+	}
+	site := GetSite()
+	summarySeparator = site.Separator
+	return summarySeparator
 }
