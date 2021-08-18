@@ -1,6 +1,7 @@
 package web
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -47,7 +48,9 @@ func (ctr Post) Save(c *gin.Context) {
 		ctr.Error(c, "参数错误:"+err.Error())
 		return
 	}
-	p := model.Post{Title: req.Title, Content: req.Content}
+	fmt.Printf("===>REQUEST:%#v\n", req)
+	p := model.Post{Title: req.Title, Content: req.Content, Tags: model.NewStringList(req.Tags)}
+	fmt.Printf("===>P:%#v\n", p)
 	id, _ := ctr.GetQueryInt(c, "id", 0)
 	var err error
 	if id == 0 {

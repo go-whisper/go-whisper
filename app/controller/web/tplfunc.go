@@ -1,11 +1,14 @@
 package web
 
 import (
+	"html/template"
+	"strings"
+	"time"
+
 	"github.com/go-whisper/go-whisper/app/instance"
+	"github.com/go-whisper/go-whisper/app/model"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/parser"
-	"html/template"
-	"time"
 )
 
 func init() {
@@ -15,7 +18,12 @@ func init() {
 		"TimeMonth":      TimeMonth,
 		"TimeDay":        TimeDay,
 		"MarkdownToHTML": MarkdownToHTML,
+		"StringListJoin": StringListJoin,
 	})
+}
+
+func StringListJoin(strList model.StringList) string {
+	return strings.Join(strList, ",")
 }
 
 func TimeYear(t time.Time) int {

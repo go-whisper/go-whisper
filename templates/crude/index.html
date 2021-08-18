@@ -34,8 +34,11 @@
                             <h2 class="post-title"><a class="tag tag-pinned-posts">*</a>{{.Title}}</h2>
                             <p class="post-meta">
                                 {{.CreatedAt}}
-                                {{range .Tags}}<a class="tag tag-posts" href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{
-                                end }}
+                                {{range .Tags}}
+                                {{if ne . ""}}
+                                <a class="tag tag-posts" href="/tags/{{.}}">{{.}}</a>
+                                {{end}}
+                                {{ end }}
                             </p>
                         </header>
                         <div class="post-description">
@@ -56,13 +59,16 @@
                             <p class="post-meta">
                                 {{.CreatedAt}}
                                 {{if $.IsLoggedIn}}
-                                &nbsp;&nbsp; <a href="{{$.Site.Domain}}/admin/posts/form?id={{.ID}}" title="编辑"><i
+                                &nbsp;&nbsp; <a href="/admin/posts/form?id={{.ID}}" title="编辑"><i
                                         class="fa fa-pencil"></i></a>
                                 &nbsp;&nbsp; <a href="#" data-id="{{.ID}}" class="j-delete" title=" 删除"><i
                                         class="fa fa-trash"></i></a>
                                 {{end}}
-                                {{range .Tags}}<a class="tag tag-posts" href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{
-                                end }}
+                                {{range .Tags}}
+                                {{if ne . ""}}
+                                <a class="tag tag-posts" href="/tags/{{.}}">{{.}}</a>
+                                {{end}}
+                                {{ end }}
                             </p>
                         </header>
 
