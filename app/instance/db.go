@@ -2,13 +2,15 @@ package instance
 
 import (
 	"github.com/spf13/viper"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
-	gormLogger "gorm.io/gorm/logger"
+	// "gorm.io/driver/sqlite"
 	"log"
 	"os"
 	"sync"
 	"time"
+
+	"github.com/cloudquery/sqlite"
+	"gorm.io/gorm"
+	gormLogger "gorm.io/gorm/logger"
 )
 
 var db *gorm.DB
