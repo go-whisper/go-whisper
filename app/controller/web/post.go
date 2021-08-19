@@ -1,8 +1,8 @@
 package web
 
 import (
-	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-whisper/go-whisper/app/instance"
@@ -48,9 +48,8 @@ func (ctr Post) Save(c *gin.Context) {
 		ctr.Error(c, "参数错误:"+err.Error())
 		return
 	}
-	fmt.Printf("===>REQUEST:%#v\n", req)
+	req.Content = strings.ReplaceAll(req.Content, "\r\n", "\n")
 	p := model.Post{Title: req.Title, Content: req.Content, Tags: model.NewStringList(req.Tags)}
-	fmt.Printf("===>P:%#v\n", p)
 	id, _ := ctr.GetQueryInt(c, "id", 0)
 	var err error
 	if id == 0 {
