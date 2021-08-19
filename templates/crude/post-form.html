@@ -23,6 +23,14 @@
                                 placeholder="title" />
                         </div>
                         <div class="pure-control-group">
+                            <label for="is_pinned">pinned</label>
+                            {{ if .Data.post.IsPinned }}
+                            <input type="checkbox" id="is_pinned" name="is_pinned" value="true" checked />
+                            {{ else }}
+                            <input type="checkbox" id="is_pinned" name="is_pinned" value="true" />
+                            {{ end }}
+                        </div>
+                        <div class="pure-control-group">
                             <label for="tags">tags</label>
                             <input type="text" id="tags" name="tags" value="{{StringListJoin .Data.post.Tags}}"
                                 placeholder="使用逗号或空格分割" />

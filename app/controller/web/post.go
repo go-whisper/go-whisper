@@ -49,7 +49,7 @@ func (ctr Post) Save(c *gin.Context) {
 		return
 	}
 	req.Content = strings.ReplaceAll(req.Content, "\r\n", "\n")
-	p := model.Post{Title: req.Title, Content: req.Content, Tags: model.NewStringList(req.Tags)}
+	p := model.Post{Title: req.Title, Content: req.Content, Tags: model.NewStringList(req.Tags), IsPinned: req.IsPinned}
 	id, _ := ctr.GetQueryInt(c, "id", 0)
 	var err error
 	if id == 0 {
