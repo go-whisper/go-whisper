@@ -16,11 +16,9 @@
         <div class="content pure-u-1 pure-u-md-3-4">
             <div>
                 <div class="posts">
-                    <h1 class="content-subhead">Pinned Post</h1>
-
                     <section class="post">
                         <header class="post-header">
-                            <h2 class="post-title">{{.Title}}</h2>
+                            <h2 class="post-title">{{.Data.post.Title}}</h2>
                             <p class="post-meta">
                                 {{.Data.post.CreatedAt}}
                                 {{range .Data.post.Tags}}
