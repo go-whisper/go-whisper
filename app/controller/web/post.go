@@ -36,8 +36,9 @@ func (ctr Post) Form(c *gin.Context) {
 	tpl := ctr.NewTemplate("post-form.html")
 	tpl.Title = "首页 - " + tpl.Site.Name
 	tpl.Data = gin.H{
-		"post": p,
-		"id":   id,
+		"post":             p,
+		"id":               id,
+		"summarySeparator": model.SummarySeparator(),
 	}
 	ctr.Response(c, tpl)
 }

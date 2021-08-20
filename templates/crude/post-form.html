@@ -38,6 +38,9 @@
                         <div class="pure-control-group">
                             <label for="Content">Content</label>
                             <textarea id="Content" name="content" cols="80" rows="30">{{.Data.post.Content}}</textarea>
+                            <div style="width:500px; margin:auto;color:gray;">
+                                您可以使用<code>{{.Data.summarySeparator}}</code>作为内容摘要分割符
+                            </div>
                         </div>
                         <div class="pure-controls">
                             <button type="submit" class="pure-button pure-button-primary">

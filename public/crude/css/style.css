@@ -216,5 +216,12 @@ pre {
 }
 
 .admin-tool-box {
-    width:100%; text-align: right; overflow:hidden;top:10em; right: 20em; position: sticky;
+    position: -webkit-sticky;  
+    position: -moz-sticky;  
+    position: -ms-sticky;  
+    position: sticky;  
+    width: 60px;
+    top: 10em;
+    /* right: 10em; */
+    margin-left: 95%;
 }
