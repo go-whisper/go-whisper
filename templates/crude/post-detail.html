@@ -23,9 +23,11 @@
                             <h2 class="post-title">{{.Title}}</h2>
                             <p class="post-meta">
                                 {{.Data.post.CreatedAt}}
-                                {{range .Data.post.Tags}}<a class="tag tag-posts"
-                                    href="{{$.Site.Domain}}/tags/{{.}}">{{.}}</a>{{
-                                end }}
+                                {{range .Data.post.Tags}}
+                                {{if ne . ""}}
+                                <a class="tag tag-posts" href="/tags/{{.}}">{{.}}</a>
+                                {{end}}
+                                {{ end }}
                             </p>
                         </header>
                         <div class="post-description">
