@@ -28,6 +28,10 @@
                                 placeholder="title" />
                         </div>
                         <div class="pure-control-group">
+                            <label for="url">url</label>
+                            <input type="text" id="url" name="url" value="{{.Data.post.URL}}" />
+                        </div>
+                        <div class="pure-control-group">
                             <label for="is_pinned">pinned</label>
                             {{ if .Data.post.IsPinned }}
                             <input type="checkbox" id="is_pinned" name="is_pinned" value="true" checked />

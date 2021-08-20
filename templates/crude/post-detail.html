@@ -19,6 +19,7 @@
                     <section class="post">
                         <header class="post-header">
                             <h2 class="post-title">{{.Data.post.Title}}</h2>
+                            {{if ne .Data.contentType "page"}}
                             <p class="post-meta">
                                 {{.Data.post.CreatedAt}}
                                 {{range .Data.post.Tags}}
@@ -27,6 +28,7 @@
                                 {{end}}
                                 {{ end }}
                             </p>
+                            {{end}}
                         </header>
                         <div class="post-description">
                             <p>

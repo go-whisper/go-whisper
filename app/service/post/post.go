@@ -2,6 +2,7 @@ package post
 
 import (
 	"errors"
+	"strconv"
 
 	"github.com/go-whisper/go-whisper/app/bizerr"
 	"github.com/go-whisper/go-whisper/app/instance"
@@ -33,6 +34,11 @@ func List(limit, offset int, opt model.Option) (int64, []model.Post, error) {
 			return total, posts, bizerr.ErrDB
 		}
 	}
+	for k := range posts {
+		if posts[k].URL == "" {
+			posts[k].URL = strconv.Itoa(int(posts[k].ID))
+		}
+	}
 	return total, posts, nil
 }
 
@@ -45,8 +51,16 @@ func Remove(id uint) error {
 }
 
 func Detail(id uint) (model.Post, error) {
+	return detail("id=?", id)
+}
+
+func DetailByURL(url string) (model.Post, error) {
+	return detail("url=?", url)
+}
+
+func detail(condition string, val interface{}) (model.Post, error) {
 	post := model.Post{}
-	if err := instance.DB().First(&post, id).Error; err != nil {
+	if err := instance.DB().Where(condition, val).First(&post).Error; err != nil {
 		instance.Logger().Error("post.Detail() db.Find() fail", zap.String("caller", caller("Remove", "db.Delete()")), zap.Error(err))
 		return post, err
 	}

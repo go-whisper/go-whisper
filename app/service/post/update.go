@@ -7,7 +7,8 @@ import (
 )
 
 func Update(id uint, post *model.Post) error {
-	if err := instance.DB().Select("title", "content", "tags", "is_pinned").Where("id=?", id).Updates(post).Error; err != nil {
+	if err := instance.DB().Select("title", "content", "tags", "is_pinned", "url").Where("id=?", id).
+		Updates(post).Error; err != nil {
 		instance.Logger().Error("post.Update() fail", zap.Error(err))
 		return err
 	}

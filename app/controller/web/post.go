@@ -16,20 +16,43 @@ type Post struct {
 }
 
 func (ctr Post) Detail(c *gin.Context) {
-	id, _ := ctr.GetParamInt(c, "id")
-	p, err := post.Detail(uint(id))
+	var (
+		p   model.Post
+		err error
+	)
+	id, _ := ctr.GetParamInt(c, "flag")
+	if id > 0 {
+		p, err = post.Detail(uint(id))
+	} else {
+		p, err = post.DetailByURL(c.Param("flag"))
+	}
 	if err != nil {
 		ctr.Error(c, "读取数据出错，请稍候再试")
 		return
 	}
+	ctr.detail(c, p, "")
+}
+
+func (ctr Post) DetailForPage(c *gin.Context) {
+	p, err := post.DetailByURL(c.Param("page"))
+	if err != nil {
+		ctr.Error(c, "读取数据出错，请稍候再试")
+		return
+	}
+	ctr.detail(c, p, "page")
+}
+
+func (ctr Post) detail(c *gin.Context, p model.Post, contentType string) {
 	tpl := ctr.NewTemplate("post-detail.html")
-	tpl.Title = p.Title + " - " + tpl.Site.Name
+	tpl.Title = p.Title
 	tpl.Data = gin.H{
-		"post": p,
-		"id":   id,
+		"post":        p,
+		"id":          p.ID,
+		"contentType": contentType,
 	}
 	ctr.Response(c, tpl)
 }
+
 func (ctr Post) Form(c *gin.Context) {
 	id, _ := ctr.GetQueryInt(c, "id", 0)
 	p, _ := post.Detail(uint(id))
@@ -50,7 +73,13 @@ func (ctr Post) Save(c *gin.Context) {
 		return
 	}
 	req.Content = strings.ReplaceAll(req.Content, "\r\n", "\n")
-	p := model.Post{Title: req.Title, Content: req.Content, Tags: model.NewStringList(req.Tags), IsPinned: req.IsPinned}
+	p := model.Post{
+		Title:    req.Title,
+		Content:  req.Content,
+		Tags:     model.NewStringList(req.Tags),
+		IsPinned: req.IsPinned,
+		URL:      req.URL,
+	}
 	id, _ := ctr.GetQueryInt(c, "id", 0)
 	var err error
 	if id == 0 {

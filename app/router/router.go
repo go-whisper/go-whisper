@@ -19,7 +19,8 @@ func init() {
 		{
 			ctr := web.Post{}
 			frontend.GET("", ctr.Index)
-			frontend.GET("posts/:id", ctr.Detail)
+			frontend.GET("posts/:flag", ctr.Detail)
+			frontend.GET("pages/:page", ctr.DetailForPage)
 			frontend.GET("tags/:tag", ctr.TagPosts)
 		}
 		{

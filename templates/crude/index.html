@@ -41,7 +41,7 @@
                         <header class="post-header">
                             <h2 class="post-title">
                                 <a class="tag tag-pinned-posts">*</a>
-                                <a href="/posts/{{.ID}}">{{.Title}}</a>
+                                <a href="/posts/{{.URL}}">{{.Title}}</a>
                             </h2>
                             <p class="post-meta">
                                 {{.CreatedAt}}
@@ -72,7 +72,7 @@
                     {{ range .Data.posts }}
                     <section class="post">
                         <header class="post-header">
-                            <h2 class="post-title"><a href="/posts/{{.ID}}">{{ .Title }}</a></h2>
+                            <h2 class="post-title"><a href="/posts/{{.URL}}">{{ .Title }}</a></h2>
                             <p class="post-meta">
                                 {{.CreatedAt}}
                                 {{if $.IsLoggedIn}}
