@@ -41,7 +41,7 @@ func SummarySeparator() string {
 	if summarySeparator != "" {
 		return summarySeparator
 	}
-	site := GetSite()
+	site := GetSiteParameter()
 	summarySeparator = site.Separator
 	return summarySeparator
 }

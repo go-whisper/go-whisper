@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap"
 )
 
-type Site struct {
+type SiteParameter struct {
 	Name        string `db-option:"name"`
 	Description string `db-option:"description"`
 	Domain      string `db-option:"domain"`
@@ -17,29 +17,29 @@ type Site struct {
 	Separator   string `db-option:"separator"`
 }
 
-type SiteParameter struct {
+type DBSiteParameter struct {
 	ID     uint
 	Option string
 	Value  string
 }
 
-func (SiteParameter) TableName() string {
+func (DBSiteParameter) TableName() string {
 	return "site_parameters"
 }
 
-func GetSite() *Site {
+func GetSiteParameter() *SiteParameter {
 	k := "site"
 	c := instance.Cache()
 	if c.Exists(k) {
 		res, e := c.Value(k)
 		if e == nil {
-			if v, ok := res.Data().(*Site); ok {
+			if v, ok := res.Data().(*SiteParameter); ok {
 				return v
 			}
 		}
 	}
-	site := Site{}
-	var parameters []SiteParameter
+	site := SiteParameter{}
+	var parameters []DBSiteParameter
 	if err := instance.DB().Find(&parameters).Error; err != nil {
 		instance.Logger().Error("读取站点参数失败", zap.Error(err))
 		return &site
@@ -73,4 +73,27 @@ func GetSite() *Site {
 	}
 	c.Add(k, time.Minute*10, &site)
 	return &site
+}
+
+func UpdateSiteParameter(sp SiteParameter) bool {
+	fields := reflect.TypeOf(sp)
+	values := reflect.ValueOf(&sp)
+	valuesElem := values.Elem()
+	var opt string
+	var vStr string
+	for i := 0; i < fields.NumField(); i++ {
+		opt = fields.Field(i).Tag.Get("db-option")
+		v := valuesElem.FieldByName(fields.Field(i).Name)
+		switch v.Kind() {
+		case reflect.String:
+			vStr = v.String()
+		case reflect.Int:
+			vStr = strconv.Itoa(int(v.Int()))
+		}
+		if err := instance.DB().Model(&sp).Where("option=?", opt).UpdateColumn("value", vStr).Error; err != nil {
+			instance.Logger().Error("UpdateSiteParameter fail", zap.String("option", opt), zap.Error(err))
+			return false
+		}
+	}
+	return true
 }

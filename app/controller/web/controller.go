@@ -26,7 +26,7 @@ type Controller struct {
 }
 
 type Template struct {
-	Site        *model.Site
+	Site        *model.SiteParameter
 	Path        string // 要使用的模板路径
 	Title       string // 页面 title 标签
 	Keywords    string // 页面 meta 标签: Keywords
@@ -47,7 +47,7 @@ func (ctr Controller) NewTemplate(path string) *Template {
 		path += ".html"
 	}
 	tpl := &Template{Path: path}
-	tpl.Site = model.GetSite()
+	tpl.Site = model.GetSiteParameter()
 	return tpl
 }
 

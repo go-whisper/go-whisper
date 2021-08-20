@@ -1,0 +1,5 @@
+package siteparameter
+
+func Update() {
+	//
+}

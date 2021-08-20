@@ -19,7 +19,7 @@ func (ctr Post) Index(c *gin.Context) {
 		posts []model.Post
 	)
 	p, _ := ctr.GetQueryInt(c, "page", 1)
-	pageSize := model.GetSite().PageSize
+	pageSize := model.GetSiteParameter().PageSize
 	total, posts, err = post.List(pageSize, pageSize*p-pageSize, opt)
 	if err != nil {
 		instance.Logger().Error("加载首页出错", zap.String("caller", caller("Index", "Index")))
@@ -61,7 +61,7 @@ func (ctr Post) TagPosts(c *gin.Context) {
 	tag := c.Param("tag")
 	opt.Set("tag", tag)
 	p, _ := ctr.GetQueryInt(c, "page", 1)
-	pageSize := model.GetSite().PageSize
+	pageSize := model.GetSiteParameter().PageSize
 	total, posts, err = post.List(pageSize, pageSize*p-pageSize, opt)
 	if err != nil {
 		instance.Logger().Error("获取首页列表出错", zap.Error(err))

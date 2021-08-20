@@ -15,9 +15,19 @@
         <div class="content pure-u-1 pure-u-md-3-4">
             {{if .IsLoggedIn}}
             <div class="admin-tool-box">
-                <a class="pure-button pure-button-primary" href="/admin/posts/form" title="添加内容">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                </a>
+                <ul>
+                    <li>
+                        <a class="pure-button pure-button-primary" href="/admin/posts/form" title="添加内容">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="pure-button pure-button-primary" href="/admin/site-parameters" title="修改站点参数">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+
             </div>
             {{end}}
             <div>
@@ -29,7 +39,10 @@
                     {{ range .Data.pinnedPosts }}
                     <section class="post">
                         <header class="post-header">
-                            <h2 class="post-title"><a class="tag tag-pinned-posts">*</a>{{.Title}}</h2>
+                            <h2 class="post-title">
+                                <a class="tag tag-pinned-posts">*</a>
+                                <a href="/posts/{{.ID}}">{{.Title}}</a>
+                            </h2>
                             <p class="post-meta">
                                 {{.CreatedAt}}
                                 {{if $.IsLoggedIn}}

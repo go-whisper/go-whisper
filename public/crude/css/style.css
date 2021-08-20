@@ -225,3 +225,8 @@ pre {
     /* right: 10em; */
     margin-left: 95%;
 }
+
+.admin-tool-box ul{
+    list-style: none;
+    line-height: 40px;
+}

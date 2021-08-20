@@ -34,7 +34,7 @@ func (ctr Post) Form(c *gin.Context) {
 	id, _ := ctr.GetQueryInt(c, "id", 0)
 	p, _ := post.Detail(uint(id))
 	tpl := ctr.NewTemplate("post-form.html")
-	tpl.Title = "首页 - " + tpl.Site.Name
+	tpl.Title = "编辑内容 - " + tpl.Site.Name
 	tpl.Data = gin.H{
 		"post":             p,
 		"id":               id,

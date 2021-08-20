@@ -35,6 +35,9 @@ func init() {
 			admin.DELETE("posts/:id", ctr.Remove)
 			admin.GET("posts/form", ctr.Form)
 			admin.POST("posts", ctr.Save)
+			spCtr := web.SiteParameter{}
+			admin.GET("site-parameters", spCtr.Form)
+			admin.POST("site-parameters", spCtr.Save)
 		}
 	}
 
