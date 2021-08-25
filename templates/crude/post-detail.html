@@ -15,7 +15,7 @@
 
         <div class="content pure-u-1 pure-u-md-3-4">
             <div>
-                <div class="posts">
+                <div class="posts line-numbers">
                     <section class="post">
                         <header class="post-header">
                             <h2 class="post-title">{{.Data.post.Title}}</h2>
@@ -30,7 +30,7 @@
                             </p>
                             {{end}}
                         </header>
-                        <div class="post-description">
+                        <div class="post-description fmt">
                             <p>
                                 {{MarkdownToHTML .Data.post.Content }}
                             </p>

@@ -92,8 +92,8 @@
 }
 /* line 90, ../scss/widget/_format.scss */
 .fmt hr {
-    margin: 20px auto;
-    border-top: 2px dotted #eee;
+    /*margin: 20px auto;*/
+    /*border-top: 2px dotted #eee;*/
 }
 /* line 94, ../scss/widget/_format.scss */
 .fmt kbd {
