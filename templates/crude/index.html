@@ -40,8 +40,7 @@
                     <section class="post">
                         <header class="post-header">
                             <h2 class="post-title">
-                                <a class="tag tag-pinned-posts">*</a>
-                                <a href="/posts/{{.URL}}">{{.Title}}</a>
+                                <a href="/posts/{{.URL}}" class="post-link"><i class="fa fa-thumb-tack"></i> {{.Title}}</a>
                             </h2>
                             <p class="post-meta">
                                 {{.CreatedAt}}
@@ -53,7 +52,7 @@
                                 {{end}}
                                 {{range .Tags}}
                                 {{if ne . ""}}
-                                <a class="tag tag-posts" href="/tags/{{.}}">{{.}}</a>
+                                <a class="tag" href="/tags/{{.}}">{{.}}</a>
                                 {{end}}
                                 {{ end }}
                             </p>
@@ -72,7 +71,9 @@
                     {{ range .Data.posts }}
                     <section class="post">
                         <header class="post-header">
-                            <h2 class="post-title"><a href="/posts/{{.URL}}">{{ .Title }}</a></h2>
+                            {{if ne .Title ""}}
+                            <h2 class="post-title"><a href="/posts/{{.URL}}" class="post-link">{{ .Title }}</a></h2>
+                            {{ end }}
                             <p class="post-meta">
                                 {{.CreatedAt}}
                                 {{if $.IsLoggedIn}}
@@ -83,7 +84,7 @@
                                 {{end}}
                                 {{range .Tags}}
                                 {{if ne . ""}}
-                                <a class="tag tag-posts" href="/tags/{{.}}">{{.}}</a>
+                                <a class="tag" href="/tags/{{.}}">{{.}}</a>
                                 {{end}}
                                 {{ end }}
                             </p>
