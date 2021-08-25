@@ -7,7 +7,6 @@
 a {
     text-decoration: none;
     color:#34495e;
-    /*color: rgb(61, 146, 201);*/
 }
 
 h3 {
@@ -114,7 +113,6 @@ pre {
 
 .post {
     padding-bottom: 3em;
-    /*background: #f29d4c;*/
 }
 .post-title {
     font-size: 2em;
@@ -171,22 +169,6 @@ pre {
     -moz-osx-font-smoothing:grayscale;
     -webkit-font-smoothing:antialiased;
 }
-/*blockquote {*/
-/*    background: #f9f9f9;*/
-/*    margin: 1.5em 10px;*/
-/*    padding: .5em 10px;*/
-/*    quotes: "\201C""\201D";*/
-/*}*/
-
-/*blockquote:before {*/
-/*    color: #9ba646;*/
-/*    content: open-quote;*/
-/*    font-size: 4em;*/
-/*    line-height: .1em;*/
-/*    margin-right: .25em;*/
-/*    vertical-align: -.4em;*/
-/*}*/
-
 .tag {
     margin: 0 0.1em;
     padding: 0.3em 1em;
@@ -257,12 +239,9 @@ code {
 
 .admin-tool-box {
     position: -webkit-sticky;  
-    position: -moz-sticky;  
-    position: -ms-sticky;  
-    position: sticky;  
+    position: sticky;
     width: 60px;
     top: 10em;
-    /* right: 10em; */
     margin-left: 95%;
 }
 
