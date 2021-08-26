@@ -72,29 +72,32 @@ pre {
     color: rgb(176, 202, 219);
 }
 
+.footer-links div{margin: 10px 0; text-align: right;}
 .nav-list {
-    margin: 0;
+    margin: 30px 0;
     padding: 0;
     list-style: none;
 }
-.nav-item {
+.nav-list li {
     display: inline-block;
     *display: inline;
     zoom: 1;
 }
-.nav-item a {
-    background: transparent;
-    border: 2px solid rgb(176, 202, 219);
-    color: #fff;
-    margin-top: 1em;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-size: 85%;
+.nav-list li:not(:first-child):before {
+    content: " / ";
 }
-.nav-item a:hover,
-.nav-item a:focus {
-    border: 2px solid rgb(61, 146, 201);
-    text-decoration: none;
+.nav-list li {
+    text-decoration:none;
+    color:#777;
+}
+.nav-list li a{
+    color: #ccc;
+}
+
+.nav-list li a:hover,
+.nav-list li a:focus {
+    color: #fdf6e3;
+    text-decoration:underline;
 }
 
 .content-subhead {
