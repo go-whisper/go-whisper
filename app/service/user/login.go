@@ -27,7 +27,10 @@ func Login(name, pwd string) (model.User, error) {
 	return u, nil
 }
 
-func UpdatePassword(name, plaintextPWD string) error {
+func UpdatePassword(name, originalPWD, plaintextPWD string) error {
+	if _, err := Login(name, originalPWD); err != nil {
+		return errors.New("请输入正确的原密码")
+	}
 	pwd := Encrypt(plaintextPWD)
 	if err := instance.DB().Model(model.User{}).Where("name=?", name).Update("password", pwd).Error; err != nil {
 		instance.Logger().Error("更新用户密码失败", zap.String("caller", caller("UpdatePassword")))

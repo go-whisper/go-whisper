@@ -28,7 +28,8 @@ func init() {
 			frontend.GET("users/login", ctr.LoginForm)
 			frontend.POST("users/login-do", ctr.Login)
 			frontend.GET("users/logout", ctr.Logout)
-			frontend.POST("users/reset-password", ctr.ResetPassword)
+			frontend.GET("users/reset-password", middleware.AdminAuth(), ctr.ResetPasswordForm)
+			frontend.POST("users/reset-password", middleware.AdminAuth(), ctr.ResetPassword)
 		}
 		{
 			admin := frontend.Group("admin")

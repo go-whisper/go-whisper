@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/go-whisper/go-whisper/app/service/user"
-	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"net/http"
 	"strconv"
@@ -46,27 +45,21 @@ func (ctr User) Logout(c *gin.Context) {
 	c.Redirect(http.StatusFound, "/")
 }
 
+func (ctr User) ResetPasswordForm(c *gin.Context) {
+	tpl := ctr.NewTemplate("reset-password.html")
+	tpl.Title = "设置密码" + tpl.Site.Name
+	tpl.Data = gin.H{}
+	ctr.Response(c, tpl)
+}
 func (ctr User) ResetPassword(c *gin.Context) {
-	resetToken := viper.GetString("secure.resetToken")
-	if len(resetToken) != 128 {
-		c.Data(http.StatusUnprocessableEntity, "text/html", []byte("请检查配置文件中 [secure.resetToken] 必须是长度为128的字符串"))
-		return
-	}
-	if c.PostForm("reset_token") != resetToken {
-		c.Data(http.StatusUnprocessableEntity, "text/html", []byte("Token 无效"))
-		return
-	}
-	if len(c.PostForm("name")) < 2 {
-		c.Data(http.StatusUnprocessableEntity, "text/html", []byte("name 参数不能少于 2 个字符"))
-		return
-	}
 	if len(c.PostForm("password")) < 6 {
-		c.Data(http.StatusUnprocessableEntity, "text/html", []byte("新密码不能少于 6 个字符"))
+		ctr.Error(c, "新密码不能少于 6 个字符")
 		return
 	}
-	if err := user.UpdatePassword(c.PostForm("name"), c.PostForm("password")); err != nil {
-		c.Data(http.StatusInternalServerError, "text/html", []byte(err.Error()))
+	name, _ := c.Cookie(UserCookieNamePrefix + "name")
+	if err := user.UpdatePassword(name, c.PostForm("original_password"), c.PostForm("password")); err != nil {
+		ctr.Error(c, err.Error())
 		return
 	}
-	c.Data(http.StatusOK, "text/html", []byte("操作成功"))
+	ctr.Success(c, "密码修改成功")
 }
