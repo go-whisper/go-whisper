@@ -34,9 +34,15 @@ func (ctr User) Login(c *gin.Context) {
 	if c.PostForm("remember") == "yes" {
 		age *= 30
 	}
-	c.SetCookie(UserCookieNamePrefix+"name", u.Name, age, "/", "", false, false)
-	c.SetCookie(UserCookieNamePrefix+"id", strconv.Itoa(int(u.ID)), age, "/", "", false, false)
+	c.SetCookie(UserCookieNamePrefix+"name", u.Name, age, "/", "", false, true)
+	c.SetCookie(UserCookieNamePrefix+"id", strconv.Itoa(int(u.ID)), age, "/", "", false, true)
 	instance.Logger().Info("用户登录成功", zap.String("name", c.PostForm("name")))
+	c.Redirect(http.StatusFound, "/")
+}
+
+func (ctr User) Logout(c *gin.Context) {
+	c.SetCookie(UserCookieNamePrefix+"name", "", -1, "/", "", false, true)
+	c.SetCookie(UserCookieNamePrefix+"id", "", -1, "/", "", false, true)
 	c.Redirect(http.StatusFound, "/")
 }
 

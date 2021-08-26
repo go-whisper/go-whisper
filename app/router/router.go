@@ -27,6 +27,7 @@ func init() {
 			ctr := web.User{}
 			frontend.GET("users/login", ctr.LoginForm)
 			frontend.POST("users/login-do", ctr.Login)
+			frontend.GET("users/logout", ctr.Logout)
 			frontend.POST("users/reset-password", ctr.ResetPassword)
 		}
 		{

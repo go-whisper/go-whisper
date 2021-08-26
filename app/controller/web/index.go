@@ -20,6 +20,7 @@ func (ctr Post) Index(c *gin.Context) {
 	)
 	p, _ := ctr.GetQueryInt(c, "page", 1)
 	pageSize := model.GetSiteParameter().PageSize
+	opt.Set("keyword", c.Query("keyword"))
 	total, posts, err = post.List(pageSize, pageSize*p-pageSize, opt)
 	if err != nil {
 		instance.Logger().Error("加载首页出错", zap.String("caller", caller("Index", "Index")))
