@@ -34,9 +34,21 @@ func (strMap StringMap) GetInt(key string) (val int, ok bool) {
 	return 0, false
 }
 
-func (v InterfaceMap) ToStringMap() StringMap {
+func (iMap InterfaceMap) GetUint(key string) (val uint, ok bool) {
+	if v, _has := iMap[key]; _has {
+		switch _v := v.(type) {
+		case int:
+			return uint(_v), true
+		case uint:
+			return _v, true
+		}
+	}
+	return 0, false
+}
+
+func (iMap InterfaceMap) ToStringMap() StringMap {
 	to := make(StringMap)
-	for mapK, mapV := range v {
+	for mapK, mapV := range iMap {
 		switch mapVT := mapV.(type) {
 		case string:
 			to[mapK] = mapVT
