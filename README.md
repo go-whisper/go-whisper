@@ -14,5 +14,5 @@
 - [ ] 自动备份
 - [ ] 图片上传、管理
 
-[屏幕截图](./screenshot.jpg)
+![屏幕截图](./screenshot.jpg)
 
