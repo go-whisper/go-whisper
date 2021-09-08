@@ -34,16 +34,46 @@ func (strMap StringMap) GetInt(key string) (val int, ok bool) {
 	return 0, false
 }
 
-func (iMap InterfaceMap) GetUint(key string) (val uint, ok bool) {
-	if v, _has := iMap[key]; _has {
-		switch _v := v.(type) {
-		case int:
-			return uint(_v), true
-		case uint:
-			return _v, true
-		}
+func (iMap InterfaceMap) Value() (driver.Value, error) {
+	if len(iMap) == 0 {
+		return []byte("{}"), nil
 	}
-	return 0, false
+	return json.Marshal(iMap)
+}
+func (iMap *InterfaceMap) Scan(data interface{}) error {
+	return json.Unmarshal(data.([]byte), &iMap)
+}
+
+func (iMap InterfaceMap) GetUint(key string, defVal ...uint) (val uint, has bool) {
+	def := uint(0)
+	if len(defVal) == 1 {
+		def = defVal[0]
+	}
+	iV, h := iMap[key]
+	if !h {
+		return def, false
+	}
+	switch v := iV.(type) {
+	case int:
+		return uint(v), true
+	case uint:
+		return v, true
+	case int64:
+		return uint(v), true
+	case uint64:
+		return uint(v), true
+	case string:
+		num, err := strconv.ParseUint(v, 10, 64)
+		if err != nil {
+			return 0, false
+		}
+		return uint(num), true
+	case float64:
+		return uint(v), true
+	default:
+		// 异常的类型
+	}
+	return def, false
 }
 
 func (iMap InterfaceMap) ToStringMap() StringMap {

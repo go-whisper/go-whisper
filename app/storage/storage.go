@@ -3,7 +3,6 @@ package storage
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/spf13/viper"
 	"github.com/tencentyun/cos-go-sdk-v5"
@@ -26,8 +25,6 @@ func cli() *cos.Client {
 }
 
 func Init() {
-	fmt.Println("url:", viper.GetString("tencentyun.cos.url"))
-	fmt.Println("cos.id:", viper.GetString("tencentyun.cos.secretID"))
 	u, _ := url.Parse(viper.GetString("tencentyun.cos.url"))
 	b := &cos.BaseURL{BucketURL: u}
 	_cli = cos.NewClient(b, &http.Client{

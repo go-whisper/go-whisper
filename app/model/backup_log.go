@@ -1,7 +1,5 @@
 package model
 
-import "time"
-
 const (
 	BackupTypeManual    = "manual"
 	BackupTypeAutomatic = "automatic"
@@ -12,7 +10,7 @@ type BackupLog struct {
 	Type      string
 	CloudKey  string
 	Others    InterfaceMap
-	CreatedAt time.Time
+	CreatedAt string `gorm:"time"`
 }
 
 func (bl BackupLog) TableName() string {

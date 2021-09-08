@@ -2,17 +2,18 @@ package backup
 
 import (
 	"errors"
-	"fmt"
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/go-whisper/go-whisper/app/model"
+	"github.com/go-whisper/go-whisper/app/storage"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
-	"path/filepath"
+	"math/rand"
+	"strconv"
 	"time"
 )
 
-func Do() error {
+func Do(typ string) error {
 	// 检查最近备份的内容ID
 	backup := model.BackupLog{}
 	if err := instance.DB().Table(backup.TableName()).Order("id desc").First(&backup).Error; err != nil {
@@ -33,14 +34,23 @@ func Do() error {
 		return nil
 	}
 
-	fName := "db-bak-" + time.Now().Format("20060102150405") + ".db"
-	path := filepath.Join(viper.GetString("database.backupPath"), fName)
-	fmt.Println("path:", path)
-	if err := instance.DB().Raw(".backup ?", path).Error; err != nil {
-		instance.Logger().Error("Backup.Do() Db.Exec() fail:", zap.Error(err))
+	rand.Seed(time.Now().UnixNano())
+	rnd := 1000 + rand.Intn(8000)
+	fName := "backup/db-" + time.Now().Format("20060102150405") + "-" + strconv.Itoa(rnd) + ".db"
+	if err := storage.PutFromFile(fName, viper.GetString("database.dsn")); err != nil {
+		instance.Logger().Error("backup.fail:", zap.Error(err))
 		return err
 	}
-	//storage.Put("")
-	instance.Logger().Info("backup:ok")
+	log := model.BackupLog{
+		Type:      typ,
+		CloudKey:  fName,
+		Others:    model.InterfaceMap{"post_id": post.ID},
+		CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
+	}
+	if err := instance.DB().Create(&log).Error; err != nil {
+		instance.Logger().Error("Backup.Do() Db.Create(&log) fail:", zap.Error(err))
+		return err
+	}
+	instance.Logger().Info("backup.ok")
 	return nil
 }
