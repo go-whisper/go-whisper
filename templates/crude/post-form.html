@@ -9,6 +9,8 @@
             width: 615px;
         }
     </style>
+    <link rel="stylesheet" href="/public/common/simplemde/simplemde.min.css">
+    <script src="/public/common/simplemde/simplemde.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +22,7 @@
 
         <div class="content pure-u-1 pure-u-md-3-4">
             <div>
-                <form class="pure-form pure-form-aligned" action="/admin/posts?id={{.Data.id}}" method="post">
+                <form class="pure-form pure-form-aligned" action="/admin/posts?id={{.Data.id}}" method="post" id="form">
                     <fieldset>
                         <div class="pure-control-group">
                             <label for="title">title</label>
@@ -45,14 +47,14 @@
                                 placeholder="使用逗号或空格分割" />
                         </div>
                         <div class="pure-control-group">
-                            <label for="Content">Content</label>
-                            <textarea id="Content" name="content" cols="80" rows="30">{{.Data.post.Content}}</textarea>
+                            <input type="hidden" name="content" id="content_data" value="{{.Data.post.Content}}">
+                            <textarea id="content" cols="80" rows="30">{{.Data.post.Content}}</textarea>
                             <div style="width:500px; margin:auto;color:gray;">
                                 您可以使用<code>{{.Data.summarySeparator}}</code>作为内容摘要分割符
                             </div>
                         </div>
                         <div class="pure-controls">
-                            <button type="submit" class="pure-button pure-button-primary">
+                            <button type="button" id="btn_post" class="pure-button pure-button-primary">
                                 <i class="fa fa-floppy-o"></i>
                                 保存</button>
                         </div>
@@ -72,6 +74,16 @@
     </div>
 
 </body>
-
+<script>
+    $(function (){
+        let toolbar = ["bold", "italic","strikethrough", "heading", "|",
+        "code","quote","unordered-list","ordered-list","|","link","image","table","|","preview","side-by-side","fullscreen"]
+        let simplemde = new SimpleMDE({ element: $("#content")[0], toolbar:toolbar});
+        $('#btn_post').on('click',function (e){
+            $('#content_data').val(simplemde.value());
+            $('#form').submit();
+        });
+    });
+</script>
 </html>
 {{ end }}
