@@ -45,9 +45,9 @@ func Do(typ string) error {
 
 	rand.Seed(time.Now().UnixNano())
 	rnd := 1000 + rand.Intn(8000)
-	fName := "lastBackup/db-" + time.Now().Format("20060102150405") + "-" + strconv.Itoa(rnd) + ".db"
+	fName := "backup/db-" + time.Now().Format("20060102150405") + "-" + strconv.Itoa(rnd) + ".db"
 	if err := storage.PutFromFile(fName, viper.GetString("database.dsn")); err != nil {
-		instance.Logger().Error("lastBackup.fail:", zap.Error(err))
+		instance.Logger().Error("Backup.fail:", zap.Error(err))
 		return err
 	}
 	log := model.BackupLog{
