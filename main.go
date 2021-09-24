@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-whisper/go-whisper/app/backup"
+	"os"
+
 	"github.com/go-whisper/go-whisper/app/commands"
 	"github.com/go-whisper/go-whisper/app/cron"
 	"github.com/go-whisper/go-whisper/app/model"
 	_ "github.com/go-whisper/go-whisper/app/router"
-	"os"
+	"github.com/go-whisper/go-whisper/app/service/backup"
 )
 
 func main() {

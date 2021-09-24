@@ -12,5 +12,6 @@ func Update(id uint, post *model.Post) error {
 		instance.Logger().Error("post.Update() fail", zap.Error(err))
 		return err
 	}
+	model.UpdateLastChange(instance.DB())
 	return nil
 }

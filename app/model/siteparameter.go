@@ -95,5 +95,6 @@ func UpdateSiteParameter(sp SiteParameter) bool {
 			return false
 		}
 	}
+	UpdateLastChange(instance.DB())
 	return true
 }

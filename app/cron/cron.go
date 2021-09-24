@@ -2,9 +2,10 @@ package cron
 
 import (
 	"fmt"
-	"github.com/go-whisper/go-whisper/app/backup"
+
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/go-whisper/go-whisper/app/model"
+	"github.com/go-whisper/go-whisper/app/service/backup"
 	cronV3 "github.com/robfig/cron/v3"
 )
 

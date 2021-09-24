@@ -47,6 +47,7 @@ func Remove(id uint) error {
 		instance.Logger().Error("db.Find() fail", zap.Error(err))
 		return bizerr.ErrDB
 	}
+	model.UpdateLastChange(instance.DB())
 	return nil
 }
 

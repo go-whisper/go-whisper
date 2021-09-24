@@ -1,10 +1,11 @@
 package post
 
 import (
+	"time"
+
 	"github.com/go-whisper/go-whisper/app/instance"
 	"github.com/go-whisper/go-whisper/app/model"
 	"go.uber.org/zap"
-	"time"
 )
 
 func Create(post *model.Post) error {
@@ -13,5 +14,6 @@ func Create(post *model.Post) error {
 		instance.Logger().Error("post.Save() fail", zap.Error(err))
 		return err
 	}
+	model.UpdateLastChange(instance.DB())
 	return nil
 }

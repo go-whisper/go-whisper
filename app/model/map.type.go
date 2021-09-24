@@ -41,7 +41,14 @@ func (iMap InterfaceMap) Value() (driver.Value, error) {
 	return json.Marshal(iMap)
 }
 func (iMap *InterfaceMap) Scan(data interface{}) error {
-	return json.Unmarshal(data.([]byte), &iMap)
+	var d []byte
+	switch dType := data.(type) {
+	case string:
+		d = []byte(dType)
+	case []byte:
+		d = dType
+	}
+	return json.Unmarshal(d, &iMap)
 }
 
 func (iMap InterfaceMap) GetUint(key string, defVal ...uint) (val uint, has bool) {
