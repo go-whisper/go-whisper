@@ -259,3 +259,7 @@ code {
 .content-common-link a:hover,.content-common-link a:active{
     color: #F0AA1D;
 }
+
+.post-description a{
+    color: #c7254e;
+}
