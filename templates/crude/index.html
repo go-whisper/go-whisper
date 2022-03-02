@@ -116,6 +116,9 @@
                             <div class="fmt">
                                 {{MarkdownToHTML .Summary }}
                             </div>
+                            {{if gt .Pages 1}}
+                            <div class="content-common-link"><a href="/posts/{{.URL}}">阅读全文 &gt;&gt;</a></div>
+                            {{ end }}
                         </div>
                     </section>
                     {{ end }}

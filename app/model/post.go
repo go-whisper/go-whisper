@@ -18,6 +18,7 @@ type Post struct {
 	Title   string
 	Content string
 	Summary string `gorm:"-"`
+	Pages   int    `gorm:"-"` // 内容分页的总页数
 	Tags    StringList
 	// TagsStr   string   `gorm:"column:tags"`
 	Type      string `gorm:"column:type"`
@@ -25,14 +26,11 @@ type Post struct {
 	CreatedAt string `gorm:"time"`
 }
 
-func (p *Post) AfterFind(tx *gorm.DB) (err error) {
-	p.Summary = p.GetSummary()
-	return
-}
-
-func (p Post) GetSummary() string {
+func (p *Post) AfterFind(*gorm.DB) (err error) {
 	tmp := strings.Split(p.Content, SummarySeparator())
-	return tmp[0]
+	p.Summary = tmp[0]
+	p.Pages = len(tmp)
+	return
 }
 
 var summarySeparator string

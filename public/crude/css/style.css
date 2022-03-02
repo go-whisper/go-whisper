@@ -115,7 +115,9 @@ pre {
 }
 
 .post {
-    padding-bottom: 3em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: #f8f5ec 1px dashed;
 }
 .post-title {
     font-size: 2em;
@@ -251,4 +253,9 @@ code {
 .admin-tool-box ul{
     list-style: none;
     line-height: 40px;
+}
+
+.content-common-link a:link,.content-common-link a:visited,
+.content-common-link a:hover,.content-common-link a:active{
+    color: #F0AA1D;
 }
