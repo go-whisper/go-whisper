@@ -3,7 +3,7 @@
 [template]
     path = "./templates"
 [database]
-    path = "./storage/db/go-whisper.db"
+    dsn = "./storage/db/go-whisper.db"
 [logger]
     path = "./storage/logs/common.log"
 [secure]
