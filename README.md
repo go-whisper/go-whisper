@@ -11,6 +11,19 @@
 - [x] 自定义模板： 毕竟程序员的审美……
 - [x] 数据库每日自动备份，目前仅支持备份到腾讯云（是的，腾讯云的永久免费额度是真香😆）； 
 
+## 安装
+
+- 克隆代码 `git clone git@github.com:go-whisper/go-whisper.git`
+- 编译 `go build`
+- 复制配置文件 `cp config.example.toml config.toml`
+- 运行安装脚本生成表结构及初始化用户 `./go-whisper install`
+- 运行程序 `./go-whisper` 
+- 打开浏览器 `http://127.0.0.1:8080` 初始账号密码均为： `whisper`
+
+**如果你需要用它正二八经的干活，你可能还需要做以下操作：**
+- 让 `go-whisper` 以服务的方式运行（你可能需要借助 `supervisor`、 `systemd` 等工具）  
+- 你可以编辑 `config.toml` 文件，修改一些配置项  
+
 ## 接下来做什么
 
 - [ ] 通过管理面板恢复指定数据库
