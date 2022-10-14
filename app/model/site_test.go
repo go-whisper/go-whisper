@@ -7,7 +7,7 @@ import (
 )
 
 func TestGetSite(t *testing.T) {
-	site := GetSite()
+	site := GetSiteParameter()
 	t.Log("site name:", site.Name)
 	assert.Equal(t, "<!–more–>", site.Separator)
 }
