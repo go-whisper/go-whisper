@@ -3,6 +3,7 @@
 *DS_Store
 /storage/logs/*.log
 /storage/db/*.db
+/storage/install.lock
 config.toml
 *.private.env.json
 /bin/

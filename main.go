@@ -28,5 +28,7 @@ func main() {
 	case "web":
 		cron.Start()
 		commands.Web()
+	case "install":
+		commands.Install()
 	}
 }
