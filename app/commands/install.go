@@ -31,7 +31,7 @@ func Install() {
 	}
 
 	instance.Logger().Info(
-		"create admin user",
+		"create admin user successful",
 		zap.String("name", defaultUser),
 		zap.String("password", defaultPassword),
 	)
@@ -61,7 +61,7 @@ func migrate() error {
 func createUser() error {
 	return user.Create(&model.User{
 		Name:     defaultUser,
-		Password: user.Encrypt(defaultUser),
+		Password: user.Encrypt(defaultPassword),
 	})
 }
 
